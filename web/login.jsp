@@ -57,7 +57,7 @@
                             </div>
                             <div class="row">
                                 <div class="col">
-                                    <form id="login-form" action="cadastro.jsp">
+                                    <form id="login-form" action="acao?a=login" method="post">
                                         <div class="mb-3">
                                             <label for="user" class="form-label">Usuário</label>
                                             <input type="text" class="form-control" name="user" id="user"
@@ -69,7 +69,16 @@
                                             <label for="password" class="form-label">Senha</label>
                                             <input type="password" class="form-control" name="password" id="password">
                                         </div>
-                                        <button type="submit" class="btn button-login">Entrar</button>                                     
+                                        <button type="submit" class="btn button-login">Entrar</button>
+                                        <%-- Exibe a mensagem na página --%>
+                                        <% String mensagem = (String) request.getAttribute("mensagem"); %>
+                                        <% if (mensagem != null) { %>
+                                        <div class="mensagem" style="color: red;
+                                             font-size: 18px;
+                                             margin-top: 10px;">
+                                            <%= mensagem %>
+                                        </div>
+                                        <% } %>
                                     </form>
                                 </div>                                
                             </div>

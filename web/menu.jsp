@@ -39,7 +39,7 @@
                         <a class="nav-link" href="criar_conta.jsp">Nova Conta</a>
                     </li>
                 </ul>
-                <form class="d-flex" role="search" action="login.jsp" method="post">                       
+                <form class="d-flex" role="search" action="acao?a=logout" method="post">                       
                     <button type="submit" class="btn button-logaut">Sair</button>
                 </form>
             </div>
