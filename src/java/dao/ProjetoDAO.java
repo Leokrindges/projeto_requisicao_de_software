@@ -24,12 +24,11 @@ public class ProjetoDAO {
             String sql = ""
                     + "insert into projeto values ("
                     + "default,"
-                    + "'" + p.getCodigo() + "',"
-                    + "'" + p.getNomeProjeto() + "'"
+                    + "'" + p.getNomeProjeto() + "',"
                     + "'" + p.getDescricaoRequisito() + "',"
                     + "'" + p.getPrioridade() + "',"
                     + "'" + p.getComplexidade() + "',"
-                    + "'" + p.getVersao() + "',"
+                    + "'" + p.getVersao() + "'"
                     + ")";
 
             System.out.println("SQL: " + sql);
@@ -70,7 +69,7 @@ public class ProjetoDAO {
             }
 
         } catch (Exception e) {
-            System.out.println("Erro ao consular Musica: " + e);
+            System.out.println("Erro ao consular projeto: " + e);
         }
 
         return projetos;
@@ -137,11 +136,11 @@ public class ProjetoDAO {
             String sql = ""
                     + "update projeto "
                     + "set "
-                    + "nome = '" + p.getNomeProjeto() + "', "
-                    + "descricao_requisito = '" + p.getDescricaoRequisito() + "', "
+                    + "nomeprojeto = '" + p.getNomeProjeto() + "', "
+                    + "descricaorequisito = '" + p.getDescricaoRequisito() + "', "
                     + "prioridade = '" + p.getPrioridade() + "', "
                     + "complexidade = '" + p.getComplexidade() + "', "
-                    + "descricao_requisito = '" + p.getVersao() + "', "
+                    + "versao = '" + p.getVersao() + "' "
                     + "where id = " + p.getCodigo();
 
             System.out.println("SQL: " + sql);

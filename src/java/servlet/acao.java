@@ -72,17 +72,47 @@ public class acao extends HttpServlet {
 
             request.setAttribute("projeto_cadastro", projeto);
 
-            encaminharPagina("cadastro.jsp", request, response);
+            encaminharPagina("edicaoRequisitos.jsp", request, response);
         }
 
-        if (a.equals("excluirprojeto")) {
+        if (a.equals("excluirProjeto")) {
             String id = request.getParameter("id");
             int codigo = Integer.parseInt(id);
 
             if (new ProjetoDAO().excluir(codigo)) {
-                encaminharPagina("sucesso.jsp", request, response);
+                request.setAttribute("mensagemExcluirSucesso", "Excluido com sucesso!!");
+                RequestDispatcher dispatcher = request.getRequestDispatcher("editar.jsp");
+                dispatcher.forward(request, response);
             } else {
-                encaminharPagina("erro.jsp", request, response);
+                request.setAttribute("mensagemExcluirErro", "Erro ao excluir!");
+                RequestDispatcher dispatcher = request.getRequestDispatcher("editar.jsp");
+                dispatcher.forward(request, response);
+            }
+        }
+
+        if (a.equals("editarUsuario")) {
+            String id = request.getParameter("id");
+            int codigo = Integer.parseInt(id);
+
+            Usuario usuario = new UsuarioDAO().consultar(codigo);
+
+            request.setAttribute("usuario_cadastro", usuario);
+
+            encaminharPagina("editarUsuarios.jsp", request, response);
+        }
+
+        if (a.equals("excluirUsuario")) {
+            String id = request.getParameter("id");
+            int codigo = Integer.parseInt(id);
+
+            if (new UsuarioDAO().excluir(codigo)) {
+                request.setAttribute("mensagemExcluirSucesso", "Excluido com sucesso!!");
+                RequestDispatcher dispatcher = request.getRequestDispatcher("listarUsuario.jsp");
+                dispatcher.forward(request, response);
+            } else {
+                request.setAttribute("mensagemExcluirErro", "Erro ao excluir!");
+                RequestDispatcher dispatcher = request.getRequestDispatcher("listarUsuario.jsp");
+                dispatcher.forward(request, response);
             }
         }
 
@@ -103,9 +133,40 @@ public class acao extends HttpServlet {
         String a = request.getParameter("a");
 
         if (a.equals("salvarProjeto")) {
-            String codigo = request.getParameter("codigo");
-            String nomeProjeto = request.getParameter("nomeProjeto");
-            String descricaoRequisito = request.getParameter("descricaoRequisito");
+            int codigo = 0;
+            String nomeProjeto = request.getParameter("nomeprojeto");;
+            String descricaoRequisito = request.getParameter("descrequisito");
+            String prioridade = request.getParameter("prioridade");
+            String complexidade = request.getParameter("complexidade");
+            String versao = request.getParameter("versao");
+
+            Projeto projeto = new Projeto();
+            int id = (codigo);
+            int versoes = Integer.parseInt(versao);
+            projeto.setCodigo(id);
+            projeto.setNomeProjeto(nomeProjeto);
+            projeto.setDescricaoRequisito(descricaoRequisito);
+            projeto.setPrioridade(prioridade);
+            projeto.setComplexidade(complexidade);
+            projeto.setVersao(versoes);
+
+            if (id == 0) {
+                if (new ProjetoDAO().salvar(projeto)) {
+                    request.setAttribute("mensagemSucessoCadastro", "Cadastrado com sucesso!!");
+                    RequestDispatcher dispatcher = request.getRequestDispatcher("cadastro.jsp");
+                    dispatcher.forward(request, response);
+                } else {
+                    request.setAttribute("mensagemErroCadastro", "Falha ao cadastrar");
+                    RequestDispatcher dispatcher = request.getRequestDispatcher("cadastro.jsp");
+                    dispatcher.forward(request, response);
+                }
+            }
+        }
+
+        if (a.equals("edicaoProjeto")) {
+            String codigo = request.getParameter("codigo");;
+            String nomeProjeto = request.getParameter("nomeprojeto");;
+            String descricaoRequisito = request.getParameter("descrequisito");
             String prioridade = request.getParameter("prioridade");
             String complexidade = request.getParameter("complexidade");
             String versao = request.getParameter("versao");
@@ -120,21 +181,71 @@ public class acao extends HttpServlet {
             projeto.setComplexidade(complexidade);
             projeto.setVersao(versoes);
 
-            if (id == 0) {
-                if (new ProjetoDAO().salvar(projeto)) {
-                    encaminharPagina("cadastro.jsp", request, response);
-                } else {
-                    encaminharPagina("cadastro.jsp", request, response);
-                }
+            if (new ProjetoDAO().atualizar(projeto)) {
+                request.setAttribute("mensagemSucessoCadastro", "Cadastrado com sucesso!!");
+                RequestDispatcher dispatcher = request.getRequestDispatcher("editar.jsp");
+                dispatcher.forward(request, response);
+                encaminharPagina("sucesso.jsp", request, response);
             } else {
-                if (new ProjetoDAO().atualizar(projeto)) {
-                    encaminharPagina("cadastro.jsp", request, response);
+                request.setAttribute("mensagemErroCadastro", "Falha ao cadastrar");
+                RequestDispatcher dispatcher = request.getRequestDispatcher("editar.jsp");
+                dispatcher.forward(request, response);
+            }
+        }
+
+        if (a.equals("criarConta")) {
+            int codigo = 0;
+            String email = request.getParameter("criarEmail");;
+            String senha = request.getParameter("criarSenha");
+            String tipoUsuario = request.getParameter("tipoUsuario");
+
+            Usuario usuario = new Usuario();
+            int id = (codigo);
+            usuario.setId(id);
+            usuario.setUsuario(email);
+            usuario.setSenha(senha);
+            usuario.setTipoUsuario(tipoUsuario);
+
+            if (id == 0) {
+                if (new UsuarioDAO().salvar(usuario)) {
+                    request.setAttribute("mensagemSucessoCadastro", "Cadastrado com sucesso!!");
+                    RequestDispatcher dispatcher = request.getRequestDispatcher("criar_conta.jsp");
+                    dispatcher.forward(request, response);
                 } else {
-                    encaminharPagina("cadastro.jsp", request, response);
+                    request.setAttribute("mensagemErroCadastro", "Falha ao cadastrar");
+                    RequestDispatcher dispatcher = request.getRequestDispatcher("criar_conta.jsp");
+                    dispatcher.forward(request, response);
                 }
             }
-
         }
+        
+        
+        if (a.equals("edicaoUsuario")) {
+            String codigo = request.getParameter("idUsuario");;
+            String usuarios = request.getParameter("criarEmail");;
+            String senha = request.getParameter("criarSenha");
+            String tipoUsuario = request.getParameter("tipoUsuario");
+            
+            Usuario usuario = new Usuario();
+            int id = Integer.parseInt(codigo);
+            usuario.setId(id);
+            usuario.setUsuario(usuarios);
+            usuario.setSenha(senha);
+            usuario.setTipoUsuario(tipoUsuario);
+            
+
+            if (new UsuarioDAO().atualizar(usuario)) {
+                request.setAttribute("mensagemSucessoCadastro", "Cadastrado com sucesso!!");
+                RequestDispatcher dispatcher = request.getRequestDispatcher("listarUsuario.jsp");
+                dispatcher.forward(request, response);
+                encaminharPagina("sucesso.jsp", request, response);
+            } else {
+                request.setAttribute("mensagemErroCadastro", "Falha ao cadastrar");
+                RequestDispatcher dispatcher = request.getRequestDispatcher("listarUsuario.jsp");
+                dispatcher.forward(request, response);
+            }
+        }
+        
 
         if (a.equals("login")) {
             // logica do login

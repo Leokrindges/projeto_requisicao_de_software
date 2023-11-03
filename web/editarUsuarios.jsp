@@ -1,6 +1,6 @@
 <%-- 
-    Document   : criar_conta
-    Created on : 21 de out. de 2023, 09:31:57
+    Document   : editarUsuarios
+    Created on : 3 de nov. de 2023, 16:33:07
     Author     : Usuario
 --%>
 <%@page import="java.util.ArrayList"%>
@@ -11,7 +11,7 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Criar Conta</title>
+        <title>Editar usuário</title>
         <link rel="stylesheet" href="estilo.css">
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
 
@@ -29,19 +29,20 @@
     %>
 
     <body>
-        <form id="create-form" class="form-criar_conta" method="post" action="acao?a=criarConta">
-            <h1>Criar Conta</h1>
+        <form id="create-form" class="form-criar_conta" method="post" action="acao?a=edicaoUsuario">
+            <h1>Editar Conta</h1>
             <div>
+                <div class="mb-3">
+                    <label for="idUsuario" class="form-label">ID Usuário</label>
+                    <input type="text" class="form-control" id="idUsuario" name="idUsuario" required="true" aria-describedby="emailHelp" value="<%= u.getId() %>">
+                </div>
                 <div class="mb-3">
                     <label for="criarEmail" class="form-label">Novo E-mail</label>
                     <input type="email" class="form-control" id="criarEmail" name="criarEmail" aria-describedby="emailHelp" required="true" value="<%= u.getUsuario() %>">
-                    <div id="emailHelp" class="form-text">Utilize seu e-mail para criar a conta.</div>
                 </div>
                 <div class="mb-3">
                     <label for="criarSenha" class="form-label">Nova Senha</label>
                     <input type="password" class="form-control" id="criarSenha" name="criarSenha" required="true" value="<%= u.getSenha() %>">
-                    <div id="emailHelp" class="form-text">Utilize uma senha e anote para
-                        não esquecer.</div>
                 </div>
                 <div class="mb-3">
                     <label for="tipoUsuario" class="form-label">Tipo de Usuario</label>
@@ -53,7 +54,7 @@
                 </div>
             </div>
             <div>
-                <button type="submit" class="btn btn-primary">Criar conta</button>
+                <button type="submit" class="btn btn-primary">Atualizar</button>
             </div>
             <%-- Exibe a mensagem na página --%>
             <% String mensagemErroCadastro = (String) request.getAttribute("mensagemErroCadastro"); %>

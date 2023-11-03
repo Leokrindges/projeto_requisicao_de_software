@@ -9,10 +9,16 @@ package entidade;
  * @author Usuario
  */
 public class Usuario {
-    private String id;
+    private int id;
     private String usuario;
     private String senha;
     private String tipoUsuario;
+    
+    public Usuario() {
+        usuario = "";
+        senha="";
+        tipoUsuario="";
+    }
 
     public String getTipoUsuario() {
         return tipoUsuario;
@@ -22,18 +28,15 @@ public class Usuario {
         this.tipoUsuario = tipoUsuario;
     }
     
-    
-    
-   
     public String getUsuario() {
         return usuario;
     }
 
-    public String getId() {
+    public int getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(int id) {
         this.id = id;
     }   
 

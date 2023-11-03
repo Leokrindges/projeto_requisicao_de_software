@@ -14,14 +14,14 @@ public class Projeto {
     private String nomeProjeto;
     private String descricaoRequisito;
     private String prioridade;
-    private String Complexidade;
+    private String complexidade;
     private int versao;
 
     public Projeto() {
         nomeProjeto = "";
         descricaoRequisito = "";
         prioridade = "";
-        Complexidade = "";
+        complexidade = "";
 
     }
 
@@ -58,11 +58,11 @@ public class Projeto {
     }
 
     public String getComplexidade() {
-        return Complexidade;
+        return complexidade;
     }
 
     public void setComplexidade(String Complexidade) {
-        this.Complexidade = Complexidade;
+        this.complexidade = Complexidade;
     }
 
     public int getVersao() {

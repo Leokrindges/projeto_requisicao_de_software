@@ -20,7 +20,7 @@
     <%@include file="menu.jsp" %>
 
     <body>
-        <h1>Editar</h1>
+        <h1>Listagem dos projetos</h1>
         <div class="container">
             <%            ArrayList<Projeto> projeto = new ProjetoDAO().consultar();
             %>
@@ -34,27 +34,48 @@
                 <th>Versão</th>
                 <th>Editar</th>
                 <th>Excluir</th>
-                    <%
-                    for (int i = 0; i < projeto.size(); i++) {
-                    %>
+
+
+                <%
+                for (int i = 0; i < projeto.size(); i++) {
+                %>
                 <tr>
                     <td><%= projeto.get(i).getCodigo()%></td>
                     <td><%= projeto.get(i).getNomeProjeto()%></td>
-                    <td><%= projeto.get(i).getDescricaoProjeto%></td>
-                    <td><%= projeto.get(i).getPrioridade%></td>
-                    <td><%= projeto.get(i).getComplexidade%></td>
-                    <td><%= projeto.get(i).getVersao%></td>
+                    <td><%= projeto.get(i).getDescricaoRequisito()%></td>
+                    <td><%= projeto.get(i).getPrioridade()%></td>
+                    <td><%= projeto.get(i).getComplexidade()%></td>
+                    <td><%= projeto.get(i).getVersao()%></td>
 
 
                     <td><a href="acao?a=editarProjeto&id=<%= projeto.get(i).getCodigo()%>" class="btn btn-success">Editar</a></td>
                     <td><a href="acao?a=excluirProjeto&id=<%= projeto.get(i).getCodigo()%>" class="btn btn-danger">Excluir</a></td>
+
                 </tr>
                 <%
                     }
                 %>
-
-
             </table>
+            
+            <%-- Exibe a mensagem na página --%>
+                    <% String mensagemExcluirSucesso = (String) request.getAttribute("mensagemExcluirSucesso"); %>
+                    <% if (mensagemExcluirSucesso != null) { %>
+                <div class="mensagem" style="color: blue;
+                     font-size: 18px;
+                     margin-top: 10px;">
+                    <%= mensagemExcluirSucesso %>
+                </div>
+                <% } %>
+                <%-- Exibe a mensagem na página --%>
+                <% String mensagemExcluirErro = (String) request.getAttribute("mensagemExcluirErro"); %>
+                <% if (mensagemExcluirErro != null) { %>
+                <div class="mensagem" style="color: red;
+                     font-size: 18px;
+                     margin-top: 10px;">
+                    <%= mensagemExcluirErro %>
+                </div>
+                <% } %>
+            
         </div>
 
     </body>

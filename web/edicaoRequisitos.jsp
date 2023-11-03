@@ -1,4 +1,8 @@
-
+<%-- 
+    Document   : edicaoRequisitos
+    Created on : 3 de nov. de 2023, 10:51:45
+    Author     : Usuario
+--%>
 <%@page import="java.util.ArrayList"%>
 <%@page import="dao.ProjetoDAO"%>
 <%@page import="entidade.Projeto"%>
@@ -8,7 +12,7 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Cadastrar</title>
+        <title>Editar projetos</title>
         <link rel="stylesheet" href="./estilo.css">
     </head>
 
@@ -24,10 +28,14 @@
     %>    
 
     <body>
-        <h1>Cadastro de Projetos</h1>
+        <h1>Editar projetos</h1>
 
         <div class="container">
-            <form method="post" action="acao?a=salvarProjeto">
+            <form method="post" action="acao?a=edicaoProjeto">
+                <div class="mb-3">
+                    <label for="codigo" class="form-label">ID projeto</label>
+                    <input type="text" class="form-control" id="codigo"  name="codigo" required="true" value="<%= p.getCodigo() %>">
+                </div>
                 <div class="mb-3">
                     <label for="nomeprojeto" class="form-label">Nome do Projeto</label>
                     <input type="text" class="form-control" id="nomeprojeto"  name="nomeprojeto" required="true" value="<%= p.getNomeProjeto() %>">
@@ -59,25 +67,25 @@
                     <input type="number" class="form-control" id="versao"  name="versao" required="true" value="<%= p.getVersao() %>">
                 </div>
                 <div>
-                    <button type="submit" class="btn btn-primary">Cadastrar</button>               
+                    <button type="submit" style="margin-bottom: 15px;" class="btn btn-primary">Atualizar</button>               
                 </div>
 
                 <%-- Exibe a mensagem na página --%>
-                <% String mensagemErro = (String) request.getAttribute("mensagemErroCadastro"); %>
-                <% if (mensagemErro != null) { %>
+                <% String mensagemErroEdicao = (String) request.getAttribute("mensagemErroEdicao"); %>
+                <% if (mensagemErroEdicao != null) { %>
                 <div class="mensagem" style="color: red;
                      font-size: 18px;
                      margin-top: 10px;">
-                    <%= mensagemErro %>
+                    <%= mensagemErroEdicao %>
                 </div>
                 <% } %>
                 <%-- Exibe a mensagem na página --%>
-                <% String mensagemSucesso = (String) request.getAttribute("mensagemSucessoCadastro"); %>
-                <% if (mensagemSucesso != null) { %>
+                <% String mensagemSucessoEdicao = (String) request.getAttribute("mensagemSucessoEdicao"); %>
+                <% if (mensagemSucessoEdicao != null) { %>
                 <div class="mensagem" style="color: blue;
                      font-size: 18px;
                      margin-top: 10px;">
-                    <%= mensagemSucesso %>
+                    <%= mensagemSucessoEdicao %>
                 </div>
                 <% } %>
 

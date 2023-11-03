@@ -27,16 +27,19 @@
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav">
                     <li class="nav-item">
-                        <a class="nav-link" href="cadastro.jsp">Cadastrar</a>
+                        <a class="nav-link" href="cadastro.jsp">Cadastrar Projetos</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="editar.jsp">Editar</a>
+                        <a class="nav-link" href="editar.jsp">Listagem de Projetos</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="consulta.jsp">Consultar</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="criar_conta.jsp">Nova Conta</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="listarUsuario.jsp">Listar Usuários</a>
                     </li>
                 </ul>
                 <form class="d-flex" role="search" action="acao?a=logout" method="post">                       
